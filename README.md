@@ -1,5 +1,7 @@
 # CappedCrowdsale-SmartContract
 
+By Vignesh Varadarajan
+
 Using Open-Zeppelin Library to build a basic capped ERC20 token sale.
 
 # Install Solidity Compiler and Truffle 
