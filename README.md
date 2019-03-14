@@ -21,12 +21,18 @@ Using Open-Zeppelin Library to build a basic capped ERC20 token sale.
 > truffle compile
 > truffle develop
 > migrate --reset
+
+> ExampleToken.deployed().then((t) => {token = t;})
+> ExampleTokenCrowdsale.deployed().then((t) => {sale = t;})
+> token.transferOwnership(sale.address) 
 ```
 
 Now the ExampleToken and ExampleCrowdsaleToken contracts would be deployed.
 
 ```
-ExampleToken.deployed("Example Token", "EXM", 18).then((t) => {token = t;})
+ var token = deployer.deploy(ExampleToken,"CSC6890 Token", "GSU", 18).then(() => ExampleToken.deployed())
+  .then(token =>   deployer.deploy(ExampleTokenCrowdsale,450, accounts[0], token.address , new web3.utils.BN(web3.utils.toWei('150', 'ether'))));
+
 ExampleTokenCrowdsale.deployed(500, web3.eth.accounts[0], token.address , new web3.BigNumber(web3.toWei(200, 'ether'))).then((t) => {sale = t;})
 ```
 
@@ -99,5 +105,11 @@ sale.buyTokens(account1, {value : new web3.utils.BN(web3.utils.toWei('25', 'ethe
 ```
 This fails too as the user has already contributed.
 With revert error
+
+
+At any given time, the balance can be checked using
+```
+token.balanceOf(account0)
+``
 
 
